@@ -1,0 +1,208 @@
+/*---------------------------------------------------------------------------*/
+/*    CSS HACKS
+/*---------------------------------------------------------------------------*/
+
+/* CSS code for UI
+
+/*--- App header ------------------------------------------------------------*/
+
+header {
+  background-image: linear-gradient(#6d94bf, #446e9b 50%, #3e648d);
+  border: 1px solid #6d94bf;
+  border-radius: 4px;
+  margin-top:0px;
+  margin-bottom:15px;
+  padding: 10px 15px;
+}
+
+header * {
+  color:white;
+  margin-top:2px;
+  margin-bottom:2px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top:0px; 
+}
+
+/*--- Page Layout ------------------------------------------------------------*/
+
+body {
+  height:100%;
+}
+
+.row {
+  padding-right:15px;
+}
+
+.well {
+  margin:0px;
+} 
+
+.column {
+  padding-right:0px;
+}
+
+/*--- Options well ----------------------------------------------------------*/
+
+#options_well {
+  padding: 5px 15px 5px 15px;
+  height: 550px;
+}
+
+#obj_options_well {
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+td .form-group {
+  margin-bottom:0px;
+}
+
+td label {
+  margin-bottom:0px;
+  font-weight: normal;
+  padding-right: 10px;
+}
+
+#options_well td {
+  padding: 3px;
+}
+
+#options_well td:last-child {
+  width: 100%;
+  padding-right: 0px;
+}
+
+#options_well table {
+  padding:3px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.form-control {
+  padding-top:2px;
+  padding-bottom:2px;
+  height:26px;
+  min-height: 26px;
+}
+
+.form-group {
+  height:26px;
+  width:100%;
+}
+
+.selectize-input {
+  padding-top:2px;
+  padding-bottom:2px;
+  min-height:26px;
+  height:26px;
+  margin-bottom:10px;
+}
+
+#model .selectize-control {
+  width:100%;
+}
+
+/*--- Image well ----------------------------------------------------------*/
+
+#model_image {
+  height:300px!important;
+  line-height:300px;
+  text-align:center;
+}
+
+/*--- Model Input well ----------------------------------------------------------*/
+
+#model_input_well {
+  overflow-y:auto;
+  padding: 5px 15px 5px 15px;
+  height:250px;
+}
+
+#input_method_table {
+  padding:3px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+#input_method_table td:last-child {
+  text-align:left;
+  width: 100%;
+  padding-right: 0px;
+}
+
+#correlations_table {
+  margin-top:15px;
+  width: 400px;
+  margin-left:auto;
+  margin-right:auto;
+  border:1px solid #e3e3e3;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-radius:4px;
+  border-spacing:0px;
+  border-collapse:separate;
+}
+
+#correlations_table th, #correlations_table td:nth-child(4n+1) {
+  color:#666666;
+  font-size:16px;
+  text-align:center;
+  padding-right:10px;
+}
+
+#correlations_table td {
+  width:100px;
+  padding-bottom:10px;
+  padding-right:10px;
+}
+
+#correlations_table .form-control {
+  text-align:center;
+}
+
+#correlations_table label {
+  padding-right:0px;
+  font-weight:bold;
+}
+
+/*--- Description well ------------------------------------------------------*/
+
+#instructions_well {
+  height:285px;
+  margin-bottom:15px;
+}
+
+#inner_instructions_well {
+  height:100%;
+  background-color:white;
+  overflow-y:auto;
+}
+
+/*--- Output well ----------------------------------------------------------*/
+
+#output_well {
+  height:250px;  
+}
+
+#power th {
+  text-align:right;
+  background-image: linear-gradient(#6d7070, #474949 50%, #3d3f3f);
+  color:white;
+}
+
+#power td {
+  background-color:white;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align:right;
+}
+
+#power {
+  margin-top:19px;
+  overflow-y: auto;
+  height: 152px;
+}
+
+#power table {
+  width: 100%;
+}
