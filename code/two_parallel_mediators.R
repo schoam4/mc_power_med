@@ -25,15 +25,15 @@ cor32 <- as.numeric(input$cor32)
 cor41 <- as.numeric(input$cor41)
 cor42 <- as.numeric(input$cor42)
 cor43 <- as.numeric(input$cor43)
-varX <- as.numeric(input$varX)
-varM1 <- as.numeric(input$varM1)
-varM2 <- as.numeric(input$varM1)
-varY <- as.numeric(input$varY)
+SDX <- as.numeric(input$SDX)
+SDM1 <- as.numeric(input$SDM1)
+SDM2 <- as.numeric(input$SDM1)
+SDY <- as.numeric(input$SDY)
 
 if(abs(cor21)> .999 | abs(cor31)> .999 | abs(cor32)> .999 |
-   abs(cor41)> .999 | abs(cor42)> .999 | abs(cor43)> .999 ){
-  stop("One or more correlations are out of range (greater than 1 or less than -1)
-       check your inputs and try again")
+   abs(cor41)> .999 | abs(cor42)> .999 | abs(cor43)> .999 ) {
+   stop("One or more correlations are out of range (greater than 1 or less than -1)
+         check your inputs and try again")
 }
 
 # Create correlation / covariance matrix
@@ -52,7 +52,7 @@ corMat[3,4] <- cor43
 corMat[4,3] <- cor43
 
 # Get diagonal matrix of SDs
-SDs <- diag(sqrt(c(varX, varM1, varM2, varY)))
+SDs <- diag(c(SDX, SDM1, SDM2, SDY))
 
 # Convert to covariance matrix
 covMat <- SDs%*%corMat%*%SDs

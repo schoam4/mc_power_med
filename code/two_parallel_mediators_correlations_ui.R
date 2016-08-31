@@ -37,11 +37,11 @@ list(
         td(textInput(inputId = "cor44", label = NULL, value = "1.00"))
       ),
       tr(
-        td(style="padding-left:10px;width:40px;", label("Variances")),  
-        td(textInput(inputId = "varX", label = NULL, value = "1.00")),
-        td(textInput(inputId = "varM1", label = NULL, value = "1.00")),
-        td(textInput(inputId = "varM2", label = NULL, value = "1.00")),
-        td(textInput(inputId = "varY", label = NULL, value = "1.00"))
+        td(style="padding-left:10px;width:40px;", label("Std. Deviation")),  
+        td(textInput(inputId = "SDX", label = NULL, value = "1.00")),
+        td(textInput(inputId = "SDM1", label = NULL, value = "1.00")),
+        td(textInput(inputId = "SDM2", label = NULL, value = "1.00")),
+        td(textInput(inputId = "SDY", label = NULL, value = "1.00"))
       )
     )  
   )
