@@ -8,5 +8,5 @@ To run the app locally use the following code in R (or RStudio):
 library(shiny)
 
 # Easiest way is to use runGitHub from the shiny package
-runGitHub("mc_pow_med", "schoam4")
+runGitHub("mc_power_med", "schoam4")
 ```
