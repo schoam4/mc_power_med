@@ -1,8 +1,3 @@
-#--- PREAMBLE ----------------------------------------------------------------#
-
-# Load shinyBS (for bsButton function)
-library(shinyBS)
-
 #--- UI SCRIPT ---------------------------------------------------------------#
 
 fluidPage(theme = 'spacelab.css', #id = "page",
@@ -199,7 +194,7 @@ tags$p(tags$b("6. Input Model Values. "),
        that allow the application to compute a covariance matrix for all
        variables in the model. Currently, the only input method supported is for users
        to enter the correlations between all variables in a correlation matrix as
-       well as the variable variances. Additional methods may become
+       well as the variable standard deviations. Additional methods may become
        available in the future."),
 tags$p(tags$b("6. Initiate Power Analysis. "),
        "Once all options and model input values have been specified, the user
@@ -215,10 +210,8 @@ tags$p(tags$b("6. Initiate Power Analysis. "),
       wellPanel(id = "output_well",
         
         # 'Calculate Power' button
-        bsButton(inputId = "action", label = "Calculate Power",
-                 icon = NULL, style = "success",
-                 size = "default", type = "action", block = TRUE,
-                 disabled = FALSE, value = FALSE),
+        actionButton(inputId = "action", label = "Calculate Power",
+                     width = "100%", class = "btn-success"),
         
         # Power anlaysis output
         tableOutput("power"))
