@@ -52,16 +52,16 @@ corMat[3,1] <- cor31
 corMat[1,3] <- cor31
 corMat[2,3] <- cor32
 corMat[3,2] <- cor32
-corMat <- diag(3)
-corMat[2,1] <- .35
-corMat[1,2] <- .35
-corMat[3,1] <- .10
-corMat[1,3] <- .10
-corMat[2,3] <- .25
-corMat[3,2] <- .25
-SDX <- 1
-SDM <- 1.5
-SDY <- 2
+#corMat <- diag(3)
+#corMat[2,1] <- .35
+#corMat[1,2] <- .35
+#corMat[3,1] <- .10
+#corMat[1,3] <- .10
+#corMat[2,3] <- .25
+#corMat[3,2] <- .25
+#SDX <- 1
+#SDM <- 1.5
+#SDY <- 2
 
 # Get diagonal matrix of SDs
 SDs <- diag(c(SDX, SDM, SDY))
