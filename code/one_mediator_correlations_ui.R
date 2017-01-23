@@ -9,21 +9,21 @@ list(
       ),
       tr(
         td(style="padding-top:0px;padding-left:10px;width:32px;", label("X")),
-        td(textInput(inputId = "cor11", label = NULL, value = "1.00")),
+        td(style="text-align:center", label("1.00")),
         td(style="padding-top:0px;"),
         td(style="padding-top:0px;")
       ),
       tr(
         td(style="padding-top:0px;padding-left:10px;width:32px;", label("M")),
         td(textInput(inputId = "cor21", label = NULL, value = "0.00")),
-        td(textInput(inputId = "cor22", label = NULL, value = "1.00")),
+        td("1.00"),
         td()
       ),
       tr(
         td(style="padding-top:0px;padding-left:10px;width:32px;", label("Y")),  
         td(textInput(inputId = "cor31", label = NULL, value = "0.00")),
         td(textInput(inputId = "cor32", label = NULL, value = "0.00")),
-        td(textInput(inputId = "cor33", label = NULL, value = "1.00"))
+        td("1.00")
       ),
       tr(
         td(style="padding-top:0px;padding-left:10px;width:32px;", label("Std. Deviation")),  
