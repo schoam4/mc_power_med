@@ -109,6 +109,8 @@ fluidPage(theme = 'spacelab.css', #id = "page",
             td(nowrap = NA, label("Input Method")),
             td(selectInput(inputId = "input_method", label = NULL,
                            choices = list("Correlations" = "correlations")
+                                          # STANDARDIZED COEFFICIENTS TO BE ADDED
+                                          #"Standardized Coefficients" = "stdcof")
                       ),
                       selected = "correlations")
           )

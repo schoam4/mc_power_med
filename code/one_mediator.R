@@ -3,7 +3,7 @@
 # simple mediation model fit via 2 regression equations. Input for this
 # approach includes R^2 values of the consituent effects (a, b, c') and
 # desired variances for the X, M, and Y variables. See Thoemmes,
-# MacKinnon, and Reiser (2010), Appendix A for details.
+# MacKinnon, and Reiser (2010), Appendix A for details   .
 
 # The endpoint for each iteration is whether the XX% Monte Carlo-based
 # confidence interval contains 0. The results of each iteration are
@@ -71,7 +71,8 @@ covMat <- SDs %*% corMat %*% SDs
 
 # CHECK: Is the input covariance matrix positive definite
 if (all(eigen(covMat)$values > 0) == F) {
-  stop("The input correlation matrix is not positive definite")
+  stop("The input correlation matrix is not positive definite. Please
+       re-enter parameter values.")
 }
 
 #--- OBJECTIVE == CHOOSE N, CALCULATE POWER --------------------------------#
