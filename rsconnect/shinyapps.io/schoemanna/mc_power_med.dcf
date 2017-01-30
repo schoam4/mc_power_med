@@ -1,0 +1,10 @@
+name: mc_power_med
+account: schoemanna
+server: shinyapps.io
+appId: 115293
+bundleId: 508425
+url: https://schoemanna.shinyapps.io/mc_power_med/
+when: 1468867910.56885
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: LICENSE|README.md
