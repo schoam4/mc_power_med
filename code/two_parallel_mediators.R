@@ -18,6 +18,71 @@ if (obj == "choose_power") {
   N <- input$N
 }
 
+#--- INPUT VALUE CHECKS -------------------------------------------------------#
+
+if (obj == "choose_n") {
+  
+  # CHECK: Is N greater than 5 and an integer?
+  if (N < 5 | !abs(N - round(N)) < .Machine$double.eps ^ 0.5) {
+    stop("\"Sample Size (N)\" must be an integer greater than 5. Please change this value.")
+  }
+  
+} else {
+  
+  # CHECK: Is Target Power between 0 and 1?
+  if (TarPow < 0 | TarPow > 1) {
+    stop("\"Target Power\" must be a number between 0 and 1. Please change this value.")
+  }
+  
+  # CHECK: Is Nlow greater than 5 and an integer?
+  if (Nlow < 5 | !abs(Nlow - round(Nlow)) < .Machine$double.eps ^ 0.5) {
+    stop("\"Minimum N\" must be an integer greater than 5. Please change this value.")
+  }
+  
+  # CHECK: Is Nhigh greater than 5 and an integer?
+  if (Nhigh < 5 | !abs(Nhigh - round(Nhigh)) < .Machine$double.eps ^ 0.5) {
+    stop("\"Maximum N\" must be an integer greater than 5. Please change this value.")
+  }
+  
+  # CHECK: Is Nsteps greater than 1 and an integer?
+  if (Nsteps < 1 | !abs(Nsteps - round(Nsteps)) < .Machine$double.eps ^ 0.5) {
+    stop("\"Sample Size Steps\" must be an integer greater than 1. Please change this value.")
+  }
+  
+  # CHECK: Is Nhigh greater than nlow?
+  if (Nlow >= Nhigh) {
+    stop("\"Maxmimum N\" must be larger than \"Minimum N\". Please change these values.")
+  }
+  
+  # CHECK: Is Nsteps smaller than N range?
+  if (abs(Nhigh - Nlow) < Nsteps) {
+    stop("\"Sample Size Steps\" must be smaller than the sample size range. Please change this value.")
+  }
+  
+}
+
+# CHECK: Is the number of replications > 5 and an integer?
+if (powReps < 5 | !abs(powReps - round(powReps)) < .Machine$double.eps ^ 0.5) {
+  stop("\"# of Replications\" must be an integer greater than 5. Please change this value.")
+}
+
+# CHECK: Is the number of MC replications > 5 and an integer?
+if (mcmcReps < 5 | !abs(mcmcReps - round(mcmcReps)) < .Machine$double.eps ^ 0.5) {
+  stop("\"Monte Carlo Draws per Rep\" must be an integer greater than 5. Please change this value.")
+}
+
+# CHECK: Is the seed > 5 and an integer?
+#if (mcmcReps < 5 | !abs(mcmcReps - round(mcmcReps)) < .Machine$double.eps ^ 0.5) {
+#  stop("\"Monte Carlo Draws per Rep\" must be an integer greater than 5")
+#}
+
+# CHECK: Is the confidence level (%) between 0 and 100?
+if (conf < 0 | conf > 100) {
+  stop("\"Confidence Level (%)\" must be a number between 0 and 100. Please change this value.")
+}
+
+#--- CONVERT / CHECK COVARIANCE MATRIX ----------------------------------------#
+
 # Import model input values
 cor21 <- as.numeric(input$cor21)
 cor31 <- as.numeric(input$cor31)
