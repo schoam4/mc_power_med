@@ -41,7 +41,8 @@ fluidPage(theme = 'spacelab.css', #id = "page",
             td(nowrap = NA, label("Model")),
             td(selectInput(inputId = "model", label = NULL,
                            choices = list("One Mediator" = "one_mediator",
-                                          "Two Parallel Mediators" = "two_parallel_mediators"), 
+                                          "Two Parallel Mediators" = "two_parallel_mediators",
+                                          "Two Serial Mediators" = "two_serial_mediators"), 
                            selected = "one_mediator"))
           )
         ),
