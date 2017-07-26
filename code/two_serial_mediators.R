@@ -137,7 +137,7 @@ if (input$obj == "choose_n") {
       dat <- mvrnorm(Ns, mu = c(0,0,0,0), Sigma = covMatp)
       # Run regressions
       m1 <- lm(dat[,2] ~ dat[,1])
-      m2 <- lm(dat[,3] ~ dat[,1])
+      m2 <- lm(dat[,3] ~ dat[,1] + dat[,2])
       m3 <- lm(dat[,4] ~ dat[,2] + dat[,3] + dat[,1])
       
       # Output parameter estimates and standard errors
@@ -145,10 +145,11 @@ if (input$obj == "choose_n") {
       a2 <- rnorm(mcmcReps, coef(m2)[2], sqrt(vcov(m2)[2,2]))
       b1 <- rnorm(mcmcReps, coef(m3)[2], sqrt(vcov(m3)[2,2]))
       b2 <- rnorm(mcmcReps, coef(m3)[3], sqrt(vcov(m3)[3,3]))
+      d  <- rnorm(mcmcReps, coef(m2)[3], sqrt(vcov(m2)[3,3]))
       
       a1b1 <- a1*b1
       a2b2 <- a2*b2
-      diff <- a1*b1 - a2*b2
+      a1db2 <- a1*d*b2
       
       # Calculate confidence intervals
       low <- (1 - (conf / 100)) / 2
@@ -157,8 +158,8 @@ if (input$obj == "choose_n") {
       UL1 <- quantile(a1b1, upp)
       LL2 <- quantile(a2b2, low)
       UL2 <- quantile(a2b2, upp)        
-      LLd <- quantile(diff, low)
-      ULd <- quantile(diff, upp)  
+      LLd <- quantile(a1db2, low)
+      ULd <- quantile(a1db2, upp)  
       
       # Is rep significant?
       c(LL1*UL1 > 0, LL2*UL2 > 0, LLd*ULd > 0)
@@ -168,7 +169,7 @@ if (input$obj == "choose_n") {
     pow <- lapply(sample(1:50000, powReps), powRep)
     
     #Turn results into a matrix and then compute power for each effect
-    df <- data.frame("Parameter" = c("a1b1", "a2b2", "difference"),
+    df <- data.frame("Parameter" = c("a1b1", "a2b2", "a1db2"),
                      "N" = rep(N, 3),
                      "Power" = colSums(matrix(unlist(pow), nrow = powReps, byrow = TRUE)) / powReps)
   })
@@ -185,9 +186,9 @@ if (input$obj == "choose_n") {
       incProgress(1/powReps)
       
       dat <- mvrnorm(Ns, mu = c(0,0,0,0), Sigma = covMatp)
-      # Run regressions
+      #Run regressions
       m1 <- lm(dat[,2] ~ dat[,1])
-      m2 <- lm(dat[,3] ~ dat[,1])
+      m2 <- lm(dat[,3] ~ dat[,1] + dat[,2])
       m3 <- lm(dat[,4] ~ dat[,2] + dat[,3] + dat[,1])
       
       # Output parameter estimates and standard errors
@@ -195,10 +196,11 @@ if (input$obj == "choose_n") {
       a2 <- rnorm(mcmcReps, coef(m2)[2], sqrt(vcov(m2)[2,2]))
       b1 <- rnorm(mcmcReps, coef(m3)[2], sqrt(vcov(m3)[2,2]))
       b2 <- rnorm(mcmcReps, coef(m3)[3], sqrt(vcov(m3)[3,3]))
+      d  <- rnorm(mcmcReps, coef(m2)[3], sqrt(vcov(m2)[3,3]))
       
       a1b1 <- a1*b1
       a2b2 <- a2*b2
-      diff <- a1*b1 - a2*b2
+      a1db2 <- a1*d*b2
       
       # Calculate confidence intervals
       low <- (1 - (conf / 100)) / 2
@@ -207,8 +209,8 @@ if (input$obj == "choose_n") {
       UL1 <- quantile(a1b1, upp)
       LL2 <- quantile(a2b2, low)
       UL2 <- quantile(a2b2, upp)        
-      LLd <- quantile(diff, low)
-      ULd <- quantile(diff, upp)  
+      LLd <- quantile(a1db2, low)
+      ULd <- quantile(a1db2, upp)  
       
       # Is rep significant?
       c(LL1*UL1 > 0, LL2*UL2 > 0, LLd*ULd > 0)
@@ -225,7 +227,7 @@ if (input$obj == "choose_n") {
     pow <- mapply(FUN = powRep, Ns = Nvec, seed = sample(1:50000, powReps),
                   SIMPLIFY = FALSE)
     pow <- data.frame(Nvec, do.call("rbind", pow))
-    names(pow) <- c("N", "a1b1", "a2b2", "difference")
+    names(pow) <- c("N", "a1b1", "a2b2", "a1db2")
     #pow <- data.frame("N" = Nused,
     
     
@@ -345,7 +347,7 @@ if (input$obj == "choose_n") {
       # }
       out[[i-1]] <- res
     }
-    df <- data.frame("Parameter" = rep(c("a1b1", "a2b2", "difference"),
+    df <- data.frame("Parameter" = rep(c("a1b1", "a2b2", "a1db2"),
                                        each = length(Nused)),
                      do.call("rbind", out))
     # Check:
