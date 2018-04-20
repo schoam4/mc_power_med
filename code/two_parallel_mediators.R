@@ -222,7 +222,7 @@ if (input$obj == "choose_n") {
     
     set.seed(seed)
     # Run power analysis and logistic regression
-    pow <- mapply(FUN = powRep, Ns = Nvec, seed = sample(1:50000, powReps),
+    pow <- mapply(FUN = powRep, Ns = Nvec, seed = sample(1:50000, length(Nvec)),
                   SIMPLIFY = FALSE)
     pow <- data.frame(Nvec, do.call("rbind", pow))
     names(pow) <- c("N", "a1b1", "a2b2", "difference")
