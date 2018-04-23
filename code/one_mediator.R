@@ -36,14 +36,16 @@ if (obj == "choose_power") {
   N <- input$N
 }
 
+if (input_method == "correlations") {
 # Import model input values
 cor21 <- as.numeric(input$cor21)
 cor31 <- as.numeric(input$cor31)
 cor32 <- as.numeric(input$cor32)
-SDX <- as.numeric(input$SDX)
-SDM <- as.numeric(input$SDM)
-SDY <- as.numeric(input$SDY)
 
+if(abs(cor21)> .999 | abs(cor31)> .999 | abs(cor32)> .999) {
+  stop("One or more correlations are out of range (greater than 1 or less than -1)
+       check your inputs and try again")
+}
 # Create correlation matrix
 corMat <- diag(3)
 corMat[2,1] <- cor21
@@ -52,16 +54,44 @@ corMat[3,1] <- cor31
 corMat[1,3] <- cor31
 corMat[2,3] <- cor32
 corMat[3,2] <- cor32
-#corMat <- diag(3)
-#corMat[2,1] <- .35
-#corMat[1,2] <- .35
-#corMat[3,1] <- .10
-#corMat[1,3] <- .10
-#corMat[2,3] <- .25
-#corMat[3,2] <- .25
-#SDX <- 1
-#SDM <- 1.5
-#SDY <- 2
+} else {
+  
+  a <- as.numeric(input$STa)
+  b <- as.numeric(input$STb)
+  cprime <- as.numeric(input$STcprime)
+
+  if(abs(a)> .999 | abs(b)> .999 | abs(cprime)> .999) {
+    stop("One or more standardized coefficients are out of range (greater than 1 or less than -1)
+       check your inputs and try again")
+  }
+  
+  # Create correlation matrix
+  corMat <- diag(3)
+  corMat[2,1] <- a
+  corMat[1,2] <- a
+  corMat[3,1] <- a*b + cprime
+  corMat[1,3] <- a*b + cprime
+  corMat[2,3] <- b + a*cprime
+  corMat[3,2] <- b + a*cprime  
+}
+
+
+#--- CONVERT / CHECK COVARIANCE MATRIX ----------------------------------------#
+SDX <- as.numeric(input$SDX)
+SDM <- as.numeric(input$SDM)
+SDY <- as.numeric(input$SDY)
+
+# Get diagonal matrix of SDs
+SDs <- diag(c(SDX, SDM, SDY))
+
+# Convert to covariance matrix
+covMat <- SDs %*% corMat %*% SDs
+
+# CHECK: Is the input covariance matrix positive definite
+if (all(eigen(covMat)$values > 0) == F) {
+  stop("The input correlation matrix is not positive definite. Please
+       re-enter parameter values.")
+}
 
 #--- INPUT VALUE CHECKS -------------------------------------------------------#
 
@@ -126,19 +156,6 @@ if (conf < 0 | conf > 100) {
   stop("\"Confidence Level (%)\" must be a number between 0 and 100. Please change this value.")
 }
 
-#--- CONVERT / CHECK COVARIANCE MATRIX ----------------------------------------#
-
-# Get diagonal matrix of SDs
-SDs <- diag(c(SDX, SDM, SDY))
-
-# Convert to covariance matrix
-covMat <- SDs %*% corMat %*% SDs
-
-# CHECK: Is the input covariance matrix positive definite
-if (all(eigen(covMat)$values > 0) == F) {
-  stop("The input correlation matrix is not positive definite. Please
-       re-enter parameter values.")
-}
 
 #--- OBJECTIVE == CHOOSE N, CALCULATE POWER -----------------------------------#
 

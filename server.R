@@ -106,6 +106,11 @@ function(input, output) {
         source(paste0("./code/", input$model, "_correlations_ui.R"), local = TRUE)$value  
       })
     }
+    if (input$input_method == "stdcoef") {
+      output$input_options <- renderUI({
+        source(paste0("./code/", input$model, "_stdcoef_ui.R"), local = TRUE)$value  
+      })
+    }
     # Other input methods could go here
   })
 }
