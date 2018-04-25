@@ -116,10 +116,11 @@ corMat[4,3] <- cor43
   a2 <- as.numeric(input$STa2)
   b1 <- as.numeric(input$STb1)
   b2 <- as.numeric(input$STb2)
+  cor32 <- as.numeric(input$cor32)
   cprime <- as.numeric(input$STcprime)
 
   if(abs(a1)> .999 | abs(a2)> .999 | abs(b1)> .999 | 
-     abs(b2)> .999 | abs(cprime)> .999) {
+     abs(b2)> .999 | abs(cprime)> .999 | abs(cor32) > .999 ) {
     stop("One or more standardized coefficients are out of range (greater than 1 or less than -1)
          check your inputs and try again")
   }
@@ -127,19 +128,18 @@ corMat[4,3] <- cor43
   corMat <- diag(4)
   corMat[2,1] <- a1
   corMat[1,2] <- a1
-  corMat[3,1] <- cor31
-  corMat[1,3] <- cor31
+  corMat[3,1] <- a2
+  corMat[1,3] <- a2
   corMat[2,3] <- cor32
   corMat[3,2] <- cor32
-  corMat[4,1] <- cor41
-  corMat[1,4] <- cor41
-  corMat[2,4] <- cor42
-  corMat[4,2] <- cor42
-  corMat[3,4] <- cor43
-  corMat[4,3] <- cor43
+  corMat[4,1] <- cprime + a1*b1 + a2*b2
+  corMat[1,4] <- cprime + a1*b1 + a2*b2
+  corMat[2,4] <- a1*cprime + b1 + b2*cor32
+  corMat[4,2] <- a1*cprime + b1 + b2*cor32
+  corMat[3,4] <- a2*cprime + b2 + b1*cor32
+  corMat[4,3] <- a2*cprime + b2 + b1*cor32
   
 }
-
 
 SDX <- as.numeric(input$SDX)
 SDM1 <- as.numeric(input$SDM1)

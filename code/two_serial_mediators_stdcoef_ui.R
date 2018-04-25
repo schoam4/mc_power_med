@@ -22,8 +22,8 @@ list(
             td(textInput(inputId = "STcprime", label = NULL, value = "0.00"))
           ),
           tr(
-            td(style="padding-top:0px;padding-left:10px;width:32px;", label("r")),  
-            td(textInput(inputId = "cor32", label = NULL, value = "0.00"))
+            td(style="padding-top:0px;padding-left:10px;width:32px;", label("d")),  
+            td(textInput(inputId = "STd", label = NULL, value = "0.00"))
           ),
           tr(
             th(style="padding-top:5px;padding-left:10px;width:40px;"),

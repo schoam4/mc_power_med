@@ -83,6 +83,7 @@ if (conf < 0 | conf > 100) {
 
 #--- CONVERT / CHECK COVARIANCE MATRIX ----------------------------------------#
 
+if (input_method == "correlations") {
 # Import model input values
 cor21 <- as.numeric(input$cor21)
 cor31 <- as.numeric(input$cor31)
@@ -90,10 +91,7 @@ cor32 <- as.numeric(input$cor32)
 cor41 <- as.numeric(input$cor41)
 cor42 <- as.numeric(input$cor42)
 cor43 <- as.numeric(input$cor43)
-SDX <- as.numeric(input$SDX)
-SDM1 <- as.numeric(input$SDM1)
-SDM2 <- as.numeric(input$SDM1)
-SDY <- as.numeric(input$SDY)
+
 
 if(abs(cor21)> .999 | abs(cor31)> .999 | abs(cor32)> .999 |
    abs(cor41)> .999 | abs(cor42)> .999 | abs(cor43)> .999 ) {
@@ -115,7 +113,40 @@ corMat[2,4] <- cor42
 corMat[4,2] <- cor42
 corMat[3,4] <- cor43
 corMat[4,3] <- cor43
+} else {
+  a1 <- as.numeric(input$STa1)
+  a2 <- as.numeric(input$STa2)
+  b1 <- as.numeric(input$STb1)
+  b2 <- as.numeric(input$STb2)
+  d <- as.numeric(input$STd)
+  cprime <- as.numeric(input$STcprime)
+  
+  if(abs(a1)> .999 | abs(a2)> .999 | abs(b1)> .999 | 
+     abs(b2)> .999 | abs(cprime)> .999 | abs(d) > .999 ) {
+    stop("One or more standardized coefficients are out of range (greater than 1 or less than -1)
+         check your inputs and try again")
+  }
+  
+  corMat <- diag(4)
+  corMat[2,1] <- a1
+  corMat[1,2] <- a1
+  corMat[3,1] <- a2 + d*a1
+  corMat[1,3] <- a2 + d*a1
+  corMat[2,3] <- d + a1*a2
+  corMat[3,2] <- d + a1*a2 
+  corMat[4,1] <- cprime + a1*b1 + corMat[3,1]
+  corMat[1,4] <- cprime + a1*b1 + corMat[3,1]
+  corMat[2,4] <- a1*cprime + b1 + b2*corMat[3,1]
+  corMat[4,2] <- a1*cprime + b1 + b2*corMat[3,1]
+  corMat[3,4] <- a2*corMat[3,1] + b2 + b1*corMat[3,2]
+  corMat[4,3] <- a2*corMat[3,1] + b2 + b1*corMat[3,2]
+  
+}
 
+SDX <- as.numeric(input$SDX)
+SDM1 <- as.numeric(input$SDM1)
+SDM2 <- as.numeric(input$SDM1)
+SDY <- as.numeric(input$SDY)
 # Get diagonal matrix of SDs
 SDs <- diag(c(SDX, SDM1, SDM2, SDY))
 
