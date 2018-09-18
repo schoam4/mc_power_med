@@ -92,7 +92,7 @@ cor42 <- as.numeric(input$cor42)
 cor43 <- as.numeric(input$cor43)
 SDX <- as.numeric(input$SDX)
 SDM1 <- as.numeric(input$SDM1)
-SDM2 <- as.numeric(input$SDM1)
+SDM2 <- as.numeric(input$SDM2)
 SDY <- as.numeric(input$SDY)
 
 if(abs(cor21)> .999 | abs(cor31)> .999 | abs(cor32)> .999 |
