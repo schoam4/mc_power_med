@@ -1,10 +1,12 @@
 name: mc_power_med
 title: mc_power_med
+username:
 account: schoemanna
 server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
 appId: 115293
-bundleId: 986095
+bundleId: 2778375
 url: https://schoemanna.shinyapps.io/mc_power_med/
-when: 1505739571.54417
+when: 1580954389.11061
 asMultiple: FALSE
 asStatic: FALSE
