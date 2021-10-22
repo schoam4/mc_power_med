@@ -143,7 +143,7 @@ corMat[4,3] <- cor43
 
 SDX <- as.numeric(input$SDX)
 SDM1 <- as.numeric(input$SDM1)
-SDM2 <- as.numeric(input$SDM1)
+SDM2 <- as.numeric(input$SDM2)
 SDY <- as.numeric(input$SDY)
 # Get diagonal matrix of SDs
 SDs <- diag(c(SDX, SDM1, SDM2, SDY))
