@@ -134,12 +134,12 @@ corMat[4,3] <- cor43
   corMat[1,3] <- a2 + d*a1
   corMat[2,3] <- d + a1*a2
   corMat[3,2] <- d + a1*a2 
-  corMat[4,1] <- cprime + a1*b1 + corMat[3,1]
-  corMat[1,4] <- cprime + a1*b1 + corMat[3,1]
-  corMat[2,4] <- a1*cprime + b1 + b2*corMat[3,1]
-  corMat[4,2] <- a1*cprime + b1 + b2*corMat[3,1]
-  corMat[3,4] <- a2*corMat[3,1] + b2 + b1*corMat[3,2]
-  corMat[4,3] <- a2*corMat[3,1] + b2 + b1*corMat[3,2]
+  corMat[4,1] <- cprime + a1*b1 + a1*b2*d + a2*b2
+  corMat[1,4] <- cprime + a1*b1 + a1*b2*d + a2*b2
+  corMat[2,4] <- a1*cprime + b1 + b2*d + a1*a2*b2
+  corMat[4,2] <- a1*cprime + b1 + b2*d + a1*a2*b2
+  corMat[3,4] <- a2*cprime + b2 + b1*d + a1*cprime*d
+  corMat[4,3] <- a2*cprime + b2 + b1*d + a1*cprime*d
   
 }
 
